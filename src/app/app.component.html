@@ -9,6 +9,10 @@
   }
 </style>
 <h1>{{title}}</h1>
-<!-- Abstracting page elements to components -->
-<app-heroes></app-heroes>
+<!-- Abstracting page elements to components.
+Also includes router mapping to simulate a multi-page website navigation. -->
+<nav>
+  <a routerLink="/heroes">Heroes</a>
+</nav>
+<router-outlet></router-outlet>
 <app-messages></app-messages>
