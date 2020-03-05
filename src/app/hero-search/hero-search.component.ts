@@ -25,6 +25,8 @@ export class HeroSearchComponent implements OnInit {
     this.searchTerms.next(term);
   }
 
+  //TODO: Implement tags/filters for groups of heroes
+
   ngOnInit(): void {
     this.heroes$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
