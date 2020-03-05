@@ -6,14 +6,6 @@
   </li>
 </ul>
 
-<!-- This displays the details of the clicked hero from above only after one has been selected -->
-<div *ngIf="selectedHero">
-
-  <h2>{{selectedHero.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{selectedHero.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-    </label>
-  </div>
-</div>
+<!-- This displays the details of the clicked hero from above only after one has been selected.
+Example of injection to the property hero as well as injection of 'hero-detail' into this component-->
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
