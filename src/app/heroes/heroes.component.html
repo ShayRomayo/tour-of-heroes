@@ -5,9 +5,18 @@
     <a routerLink="/detail/{{hero.id}}">
       <span class="badge">{{hero.id}}</span> {{hero.name}}
     </a>
+    <button class="delete" title="delete hero"
+            (click)="delete(hero)">x
+    </button>
   </li>
 </ul>
 
-<!-- This displays the details of the clicked hero from above only after one has been selected.
-Example of injection to the property hero as well as injection of 'hero-detail' into this component-->
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+<div>
+  <label>Hero name:
+    <input #heroName/>
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
+</div>
