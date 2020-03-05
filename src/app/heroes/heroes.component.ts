@@ -10,7 +10,7 @@ import { HeroService } from "../hero.service";
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
 
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService) { }
 
   // Async safe method using subscribe to an Observable
   // Callback heroes from the subscribed observable to assign to this.heroes property
