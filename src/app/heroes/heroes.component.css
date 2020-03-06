@@ -50,6 +50,10 @@
   border-radius: 4px 0 0 4px;
 }
 
+.heroes .favorite {
+  background-color: #7f0021;
+}
+
 button {
   background-color: #eee;
   border: none;
