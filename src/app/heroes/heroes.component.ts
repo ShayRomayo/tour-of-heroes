@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Hero } from '../hero';
 import { HeroService } from "../hero.service";
+import { Teams } from '../Teams';
 
 @Component({
   selector: 'app-heroes',
@@ -9,6 +11,8 @@ import { HeroService } from "../hero.service";
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
+  orgs = Teams;
+  orgsOptions = [];
 
   constructor(private heroService: HeroService) { }
 
@@ -21,10 +25,10 @@ export class HeroesComponent implements OnInit {
 
   //TODO: Implement grouped heroes (teams)
 
-  add(name: string): void {
+  add(name: string, organization: string): void {
     name = name.trim();
     if(!name) { return; }
-    this.heroService.addHero({name} as Hero)
+    this.heroService.addHero({name, organization} as Hero)
         .subscribe(hero => {
           this.heroes.push(hero);
         });
@@ -37,5 +41,6 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
+    this.orgsOptions = Object.keys(this.orgs);
   }
 }
