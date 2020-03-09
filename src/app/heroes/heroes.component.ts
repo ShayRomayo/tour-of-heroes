@@ -11,6 +11,7 @@ import { Teams } from '../Teams';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
+  newHero: Hero;
   orgs = Teams;
   orgsOptions = [];
 
@@ -41,6 +42,6 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
-    this.orgsOptions = Object.keys(this.orgs);
+    this.orgsOptions = Object.keys(Teams);
   }
 }

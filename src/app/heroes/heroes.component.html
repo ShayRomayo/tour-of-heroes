@@ -2,19 +2,23 @@
 <h2>My Heroes</h2>
 
 <div>
-  <label>Hero name:
-    <input #heroName/>
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <label>
-    Organization:
-    <select #heroOrg>
-      <option *ngFor="let org of orgsOptions">{{orgs[org]}}</option>
-    </select>
-  </label>
-  <button (click)="add(heroName.value, heroOrg.value); heroName.value=''">
-    add
-  </button>
+  <h2>Hero Form</h2>
+  <form #heroForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input #name type="text" class="form-control" id="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="org">Organization</label>
+      <select #org class="form-control" id="org">
+        <option *ngFor="let org of orgsOptions">{{orgs[org]}}</option>
+      </select>
+    </div>
+    <button (click)="add(name.value, org.value); name.value=''">
+      add
+    </button>
+  </form>
 </div>
 
 <ul class="heroes">

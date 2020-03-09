@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from 'rxjs/operators';
@@ -78,15 +78,17 @@ export class HeroService {
   }
 
   searchHeroes(term: string): Observable<Hero[]> {
-    if (!term.trim()) {
+    let searchObj: string = term.trim();
+    if (!searchObj) {
       // if not search term, return empty hero array.
       return of([]);
     }
-    if (term.split(':').length > 1) {
-      return this.http.get<Hero[]>(`${this.heroesUrl}/?favorite=${term.split(':')[1]}`).pipe(
+    if (searchObj.startsWith('f:') || searchObj.startsWith('fav:')) {
+      searchObj = searchObj.split(':')[1].trim();
+      return this.http.get<Hero[]>(`${this.heroesUrl}/?favorite=${searchObj}`).pipe(
             tap(x => x.length ?
-              this.log(`found heroes matching "${term}"`) :
-              this.log(`no heroes matching "${term}"`)),
+              this.log(`found heroes matching filter tag favorite:"${searchObj}"`) :
+              this.log(`no heroes matching filter tag favorite:"${searchObj}"`)),
             catchError(this.handleError<Hero[]>('searchHeroes', []))
           );
     }
