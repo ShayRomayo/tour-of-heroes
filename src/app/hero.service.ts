@@ -82,6 +82,14 @@ export class HeroService {
       // if not search term, return empty hero array.
       return of([]);
     }
+    if (term.split(':').length > 1) {
+      return this.http.get<Hero[]>(`${this.heroesUrl}/?favorite=${term.split(':')[1]}`).pipe(
+            tap(x => x.length ?
+              this.log(`found heroes matching "${term}"`) :
+              this.log(`no heroes matching "${term}"`)),
+            catchError(this.handleError<Hero[]>('searchHeroes', []))
+          );
+    }
     return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
       tap(x => x.length ?
         this.log(`found heroes matching "${term}"`) :
