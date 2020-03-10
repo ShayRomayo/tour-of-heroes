@@ -102,10 +102,32 @@ export class HeroService {
           this.log(`found no hero(es) with ${message}`)),
         catchError(this.handleError<Hero[]>('searchHeroes', []))
       );
-    }
+    } else if (org != Teams.None) {
+      message = `hero(es) that belong to ${terms[1]}`;
+      url = `${url}org=${org}`;
+      if (fav) {
+        message = `favorited ${message}`;
+        url = `${url}&fav=${fav}`;
+      }
 
-    // if not search term, return empty hero array.
-    return of([]);
+      return this.http.get<Hero[]>(url).pipe(
+        tap(x => x.length ?
+          this.log(`Displaying ${message}`) :
+          this.log(`Found no ${message}`)),
+        catchError(this.handleError<Hero[]>('searchHeroes', []))
+      );
+    } else if (fav) {
+      url = `${url}fav=${fav}`;
+
+      return this.http.get<Hero[]>(url).pipe(
+        tap(x => x.length ?
+          this.log("Displaying favorite hero(es)") :
+          this.log("Found no favorited heroes")),
+        catchError(this.handleError<Hero[]>('searchHeroes', []))
+      );
+    } else { // if not search term, return empty hero array.
+      return of([]);
+    }
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
