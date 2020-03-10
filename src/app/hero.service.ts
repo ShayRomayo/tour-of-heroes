@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Hero } from "./hero";
 import { MessageService } from "./message.service";
+import { Teams } from './Teams';
 
 @Injectable({
   providedIn: 'root'
@@ -77,25 +78,26 @@ export class HeroService {
     );
   }
 
-  searchHeroes(term: string): Observable<Hero[]> {
-    let searchObj: string = term.trim();
-    if (!searchObj) {
+  searchHeroes(terms: string[]): Observable<Hero[]> {
+    let name: string = terms[0].trim();
+    let org: string = encodeURI(terms[1]);
+    if (!name) {
       // if not search term, return empty hero array.
       return of([]);
     }
-    if (searchObj.startsWith('f:') || searchObj.startsWith('fav:')) {
-      searchObj = searchObj.split(':')[1].trim();
-      return this.http.get<Hero[]>(`${this.heroesUrl}/?favorite=${searchObj}`).pipe(
-            tap(x => x.length ?
-              this.log(`found heroes matching filter tag favorite:"${searchObj}"`) :
-              this.log(`no heroes matching filter tag favorite:"${searchObj}"`)),
-            catchError(this.handleError<Hero[]>('searchHeroes', []))
-          );
+    if (org != Teams.None) {
+      return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${name}&org=${org}`).pipe(
+        tap(x => x.length ?
+          this.log(`found heroes matching filter tag org:"${terms[1]}" & name:"${name}"`) :
+          this.log(`no heroes matching filter tag org:"${terms[1]}" & name:"${name}"`)),
+        catchError(this.handleError<Hero[]>('searchHeroes', []))
+      );
     }
-    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${name}`).pipe(
       tap(x => x.length ?
-        this.log(`found heroes matching "${term}"`) :
-        this.log(`no heroes matching "${term}"`)),
+        this.log(`found heroes matching "${name}"`) :
+        this.log(`no heroes matching "${name}"`)),
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
   }

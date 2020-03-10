@@ -1,5 +1,4 @@
 <div>
-  <h2>Hero Form</h2>
   <div class="form-group">
     <label for="name">Name</label>
     <input #name type="text" class="form-control" id="name" required>
@@ -11,7 +10,7 @@
       <option *ngFor="let org of orgOptions">{{orgs[org]}}</option>
     </select>
   </div>
-  <button (click)="submit(name.value, org.value); name.value=''">
-    add
+  <button (click)="submit(name.value, org.value); name.value=''; org.value=orgs.None">
+    Submit
   </button>
 </div>

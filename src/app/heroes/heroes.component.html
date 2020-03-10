@@ -7,7 +7,7 @@
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
     <a routerLink="/detail/{{hero.id}}">
-      <span class="badge" [ngClass]="{'favorite': hero.favorite}">{{hero.id}}</span>
+      <span class="badge" [ngClass]="{'favorite': hero.fav}">{{hero.id}}</span>
       {{hero.name}}
       {{hero.org}}
     </a>

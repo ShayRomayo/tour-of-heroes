@@ -11,16 +11,16 @@ export class InMemoryDataService implements InMemoryDbService {
 
   createDb() {
     const heroes = [
-      {id: 11, name: 'Dr Nice', favorite: false, organization: Teams.GoodGuys},
-      {id: 12, name: 'Narco', favorite: true, organization: Teams.Baddies},
-      {id: 13, name: 'Bombasto', favorite: false, organization: Teams.Baddies},
-      {id: 14, name: 'Celeritas', favorite: false, organization: Teams.GoodGuys},
-      {id: 15, name: 'Magneta', favorite: false, organization: Teams.Baddies},
-      {id: 16, name: 'RubberMan', favorite: false, organization: Teams.GoodGuys},
-      {id: 17, name: 'Dynama', favorite: false, organization: Teams.GoodGuys},
-      {id: 18, name: 'Dr IQ', favorite: false, organization: Teams.GoodGuys},
-      {id: 19, name: 'Magma', favorite: false, organization: Teams.Baddies},
-      {id: 20, name: 'Tornado', favorite: false, organization: Teams.Gremen}
+      {id: 11, name: 'Dr Nice', fav: false, org: Teams.GoodGuys},
+      {id: 12, name: 'Narco', fav: true, org: Teams.Baddies},
+      {id: 13, name: 'Bombasto', fav: false, org: Teams.Baddies},
+      {id: 14, name: 'Celeritas', fav: false, org: Teams.GoodGuys},
+      {id: 15, name: 'Magneta', fav: false, org: Teams.Baddies},
+      {id: 16, name: 'RubberMan', fav: false, org: Teams.GoodGuys},
+      {id: 17, name: 'Dynama', fav: false, org: Teams.GoodGuys},
+      {id: 18, name: 'Dr IQ', fav: false, org: Teams.GoodGuys},
+      {id: 19, name: 'Magma', fav: false, org: Teams.Baddies},
+      {id: 20, name: 'Tornado', fav: false, org: Teams.Gremen}
     ];
     return {heroes};
   }
