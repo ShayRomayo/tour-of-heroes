@@ -3,6 +3,10 @@
 
   <app-hero-form (onHeroSubmit)="search($event)"></app-hero-form>
 
+  <label>Fav Filter
+    <input [(ngModel)]="fav" type="checkbox">
+  </label>
+
   <ul class="search-result">
     <li *ngFor="let hero of heroes$ | async" >
       <a routerLink="/detail/{{hero.id}}">

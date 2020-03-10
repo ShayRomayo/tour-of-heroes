@@ -15,6 +15,7 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./hero-search.component.css']
 })
 export class HeroSearchComponent implements OnInit {
+  fav: boolean = false;
   heroes$: Observable<Hero[]>;
   // private searchTerms = new Subject<string>();
 
@@ -22,7 +23,7 @@ export class HeroSearchComponent implements OnInit {
 
   // On submission of child form, search with given parameters
   search(terms: string[]): void {
-    this.heroes$ = this.heroService.searchHeroes(terms);
+    this.heroes$ = this.heroService.searchHeroes(terms, this.fav);
     // this.searchTerms.next(term);
   }
 

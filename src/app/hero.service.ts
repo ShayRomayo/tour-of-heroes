@@ -78,28 +78,34 @@ export class HeroService {
     );
   }
 
-  searchHeroes(terms: string[]): Observable<Hero[]> {
+  searchHeroes(terms: string[], fav: boolean): Observable<Hero[]> {
     let name: string = terms[0].trim();
     let org: string = encodeURI(terms[1]);
-    if (!name) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
-    if (org != Teams.None) {
-      return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${name}&org=${org}`).pipe(
+    let url: string = `${this.heroesUrl}/?`;
+    let message: string;
+
+    if (name.length > 0) {
+      message = `name matching "${name}"`;
+      url = `${url}name=${name}`;
+      if (org != Teams.None) {
+        message = `${message} or an org matching "${terms[1]}"`;
+        url = `${url}&org=${org}`;
+      }
+      if (fav) {
+        message = `${message} that were favorited`;
+        url = `${url}&fav=${fav}`;
+      }
+
+      return this.http.get<Hero[]>(url).pipe(
         tap(x => x.length ?
-          this.log(`found heroes matching filter tag org:"${terms[1]}" & name:"${name}"`) :
-          this.log(`no heroes matching filter tag org:"${terms[1]}" & name:"${name}"`)),
+          this.log(`found hero(es) with ${message}`) :
+          this.log(`found no hero(es) with ${message}`)),
         catchError(this.handleError<Hero[]>('searchHeroes', []))
       );
     }
 
-    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${name}`).pipe(
-      tap(x => x.length ?
-        this.log(`found heroes matching "${name}"`) :
-        this.log(`no heroes matching "${name}"`)),
-      catchError(this.handleError<Hero[]>('searchHeroes', []))
-    );
+    // if not search term, return empty hero array.
+    return of([]);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
