@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from 'rxjs/operators';
@@ -49,12 +49,20 @@ export class HeroService {
     );
   }
 
+  defaultHero(): Hero {
+    return {
+      id: -1,
+      name: "",
+      org: Teams.None,
+      fav: false
+    };
+  }
+
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }
 
   addHero (hero: Hero): Observable<Hero> {
-    hero.fav = false;
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
       catchError(this.handleError<Hero>('addHero'))
@@ -78,9 +86,10 @@ export class HeroService {
     );
   }
 
-  searchHeroes(terms: string[], fav: boolean): Observable<Hero[]> {
+  searchHeroes(terms: any[]): Observable<Hero[]> {
     let name: string = terms[0].trim();
     let org: string = encodeURI(terms[1]);
+    let fav: boolean = terms[2];
     let url: string = `${this.heroesUrl}/?`;
     let message: string;
 

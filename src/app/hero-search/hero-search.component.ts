@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
 
-import {
-  debounceTime, distinctUntilChanged, switchMap
-} from 'rxjs/operators';
+// import {
+//   debounceTime, distinctUntilChanged, switchMap
+// } from 'rxjs/operators';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -15,15 +15,14 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./hero-search.component.css']
 })
 export class HeroSearchComponent implements OnInit {
-  fav: boolean = false;
   heroes$: Observable<Hero[]>;
   // private searchTerms = new Subject<string>();
 
   constructor(private heroService: HeroService) {}
 
   // On submission of child form, search with given parameters
-  search(terms: string[]): void {
-    this.heroes$ = this.heroService.searchHeroes(terms, this.fav);
+  search(terms: any[]): void {
+    this.heroes$ = this.heroService.searchHeroes(terms);
     // this.searchTerms.next(term);
   }
 

@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Tour of Heroes';
-  //TODO: Implement displays of favorite heroes and selection of favorite heroes
 
   constructor() {
   }

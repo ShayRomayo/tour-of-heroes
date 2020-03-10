@@ -2,7 +2,7 @@
 <h2>My Heroes</h2>
 
 <!-- Abstracted the form of name/organization for denoting heroes in search and addition -->
-<app-hero-form  (onHeroSubmit)="add($event)"></app-hero-form>
+<app-hero-form [hero]="hero" (onHeroSubmit)="add($event)"></app-hero-form>
 
 <ul class="heroes">
   <li *ngFor="let hero of heroes">

@@ -3,16 +3,8 @@
   <h2>{{hero.name | uppercase}} Details</h2>
   <h2>{{hero.org}}</h2>
   <div><span>id: </span>{{hero.id}}</div>
-  <div>
-    <label>Name:
-      <input type="text" [(ngModel)]="hero.name" placeholder="name"/>
-    </label>
-  </div>
-  <div>
-    <label>Favorite
-      <input type="checkbox" [(ngModel)]="hero.fav" [checked]="hero.fav"/>
-    </label>
-  </div>
+
+  <app-hero-form [hero]="hero" (onHeroSubmit)="save($event)"></app-hero-form>
+
   <button (click)="goBack()">Go Back</button>
-  <button (click)="save()">Save</button>
 </div>
