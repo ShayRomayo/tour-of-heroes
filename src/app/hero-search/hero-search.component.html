@@ -1,7 +1,7 @@
 <div id="search-component">
   <h3>Hero Search:</h3>
 
-  <app-hero-form (onHeroSubmit)="search($event)"></app-hero-form>
+  <app-hero-form [hero]="hero" (onHeroSubmit)="search($event)"></app-hero-form>
 
   <ul class="search-result">
     <li *ngFor="let hero of heroes$ | async" >

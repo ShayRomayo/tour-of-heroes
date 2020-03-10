@@ -16,6 +16,7 @@ import { HeroService } from '../hero.service';
 })
 export class HeroSearchComponent implements OnInit {
   heroes$: Observable<Hero[]>;
+  hero: Hero;
   // private searchTerms = new Subject<string>();
 
   constructor(private heroService: HeroService) {}
@@ -28,6 +29,7 @@ export class HeroSearchComponent implements OnInit {
 
   // Maintained old method of using a stream to inject search terms into hero service
   ngOnInit(): void {
+    this.hero = this.heroService.defaultHero();
     // this.heroes$ = this.searchTerms.pipe(
     //   // wait 300ms after each keystroke before considering the term
     //   debounceTime(300),
