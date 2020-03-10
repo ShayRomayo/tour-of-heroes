@@ -11,7 +11,6 @@ import { Teams } from '../Teams';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
-  newHero: Hero;
   orgs = Teams;
   orgsOptions = [];
 
@@ -26,10 +25,11 @@ export class HeroesComponent implements OnInit {
 
   //TODO: Implement grouped heroes (teams)
 
-  add(name: string, organization: string): void {
-    name = name.trim();
+  add(hero: string[]): void {
+    let name = hero[0].trim();
+    let org: string = hero[1];
     if(!name) { return; }
-    this.heroService.addHero({name, organization} as Hero)
+    this.heroService.addHero({name, org} as Hero)
         .subscribe(hero => {
           this.heroes.push(hero);
         });

@@ -13,6 +13,7 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { InMemoryDataService } from './in-memory-data.service';
+import { HeroFormComponent } from './hero-form/hero-form.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { InMemoryDataService } from './in-memory-data.service';
     MessagesComponent,
     HeroDetailComponent,
     HeroSearchComponent,
+    HeroFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,32 +1,15 @@
 <!-- This displays a list of all the heroes -->
 <h2>My Heroes</h2>
 
-<div>
-  <h2>Hero Form</h2>
-  <form #heroForm="ngForm">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input #name type="text" class="form-control" id="name" required>
-    </div>
-
-    <div class="form-group">
-      <label for="org">Organization</label>
-      <select #org class="form-control" id="org">
-        <option *ngFor="let org of orgsOptions">{{orgs[org]}}</option>
-      </select>
-    </div>
-    <button (click)="add(name.value, org.value); name.value=''">
-      add
-    </button>
-  </form>
-</div>
+<!-- Abstracted the form of name/organization for denoting heroes in search and addition -->
+<app-hero-form  (onHeroSubmit)="add($event)"></app-hero-form>
 
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
     <a routerLink="/detail/{{hero.id}}">
       <span class="badge" [ngClass]="{'favorite': hero.favorite}">{{hero.id}}</span>
       {{hero.name}}
-      {{hero.organization}}
+      {{hero.org}}
     </a>
     <button class="delete" title="Delete Hero"
             (click)="delete(hero)">x
