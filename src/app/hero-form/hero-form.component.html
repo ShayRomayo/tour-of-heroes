@@ -8,8 +8,8 @@
 
   <div class="form-group">
     <label for="org">Organization</label>
-    <select #org class="form-control" id="org">
-      <option *ngFor="let org of orgOptions">{{orgs[org]}}</option>
+    <select #org class="form-control" id="org" [selectedIndex]="hero.org">
+      <option [defaultSelected]="hero.org == orgs[org]" *ngFor="let org of orgOptions">{{orgs[org]}}</option>
     </select>
   </div>
   <div>
@@ -17,7 +17,9 @@
       <input #fav type="checkbox" [defaultChecked]="hero.fav">
     </label>
   </div>
-  <button (click)="submit(name.value, org.value, fav.checked); name.value=''; org.value=orgs.None">
+  <button  (click)="submit(name.value, org.value, fav.checked);
+    name.value = clear ? '' : name.value;
+    org.value = clear ? orgs.None : org.value">
     Submit
   </button>
 </div>
