@@ -20,7 +20,6 @@ export class HeroFormComponent implements OnInit {
   //TODO: Beautify with the CSS sheets. Possible Bootstrap for Reactive Web Design
   public submit(name: string, org: string, fav: boolean) {
     let data = [name, org, fav];
-    console.log(`Log:${this.hero}`);
     this.onHeroSubmit.emit(data);
   }
   ngOnInit(): void {
