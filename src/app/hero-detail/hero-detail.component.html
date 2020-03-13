@@ -4,7 +4,7 @@
   <h2>{{hero.org}}</h2>
   <div><span>id: </span>{{hero.id}}</div>
 
-  <app-hero-form [hero]="hero" [clear]="true" (onHeroSubmit)="save($event)"></app-hero-form>
+  <app-hero-form [hero]="hero" [clear]="false" (onHeroSubmit)="save($event)"></app-hero-form>
 
   <button (click)="goBack()">Go Back</button>
 </div>

@@ -19,7 +19,8 @@
   </div>
   <button  (click)="submit(name.value, org.value, fav.checked);
     name.value = clear ? '' : name.value;
-    org.value = clear ? orgs.None : org.value">
+    org.value = clear ? orgs.None : org.value;
+    fav.checked = clear? false : fav.checked">
     Submit
   </button>
 </div>
